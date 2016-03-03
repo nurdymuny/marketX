@@ -6,7 +6,15 @@
 strong {
     font-weight: 400;
 }
-
+#button1{
+    width: 20%;
+    float: left;
+}
+#button1:hover{
+    background-color: #b947bc;
+    opacity: 0.7;
+    height: auto;
+}
 #grad {
     background: url("../img/header_bg.png") repeat, -webkit-linear-gradient(-90deg, #cf5667, #b947bc); /* For Safari 5.1 to 6.0 */
     background: url("../img/header_bg.png") repeat, -o-linear-gradient(-90deg, #cf5667, #b947bc); /* For Opera 11.1 to 12.0 */
@@ -117,12 +125,13 @@ strong {
     font-size: 22px;
     color: #999;
 }
-ul.nav li a {
+ul.nav li {
     color: #fff;
     font-size: 16px;
     font-weight: 300;
+    padding: 10px 15px;
 }
-ul.nav li a:hover {
+ul.nav li:hover {
     opacity: 0.7;
 }
 .primary-container {

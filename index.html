@@ -10,14 +10,16 @@
         <!-- Bootstrap -->
         <link href="assets/css/bootstrap.css" rel="stylesheet">
         <link href="assets/css/styles.css" rel="stylesheet">
+        <link href="assets/css/react.css" rel="stylesheet">
+        <link href="assets/css/style.scss">
         <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic' rel='stylesheet' type='text/css'>
-        <script src="https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-xtp1/t39.3284-6/12624079_897774290317920_1379776191_n.js"></script>
-        <script src="https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-xfp1/t39.3284-6/12624052_751451571621845_431133942_n.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
-        <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
-        <script src="assets/build/script.js"></script>
         
+        <script src="assets/build/script.js"></script>
+        <script src="https://fb.me/react-0.13.3.js"></script>
+        <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.22/require.js"></script>
+        <link href="//cdn.muicss.com/mui-0.4.7/css/mui.min.css" rel="stylesheet" type="text/css" />
+        <script src="//cdn.muicss.com/mui-0.4.7/js/mui.min.js"></script>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -27,8 +29,62 @@
     </head>
     
     <body>
+    <script>
+  function activateModal() {
+    // initialize modal element
+    var modalEl = document.createElement('div');
+    modalEl.style.width = '400px';
+    modalEl.style.height = '300px';
+    modalEl.style.margin = '100px auto';
+    modalEl.style.backgroundColor = '#fff';
 
+    // show modal
+    mui.overlay('on', modalEl);
+  }
+</script>
 
+    <script type="text/jsx">
+     /*** @jsx React.DOM */
+     // import ProgressBar from 'react-toolbox/lib/progress_bar';
+
+    var MenuExample = React.createClass({
+    getInitialState: function(){
+        return { focused: 0 };
+    },
+
+    clicked: function(index){
+        this.setState({focused: index});
+    },
+    render: function() {
+        var self = this;
+        return (
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul className='nav navbar-nav navbar-right'>{ this.props.items.map(function(m, index){
+        
+                    var style = '';
+        
+                    if(self.state.focused == index){
+                        style = 'focused';
+                    }
+                    return <li className={style} onClick={self.clicked.bind(self, index)}>{m}</li>;
+       
+                }) }
+                        
+                </ul>
+                
+                <p className='select'>Selected: {this.props.items[this.state.focused]}</p>
+            </div>
+        );
+    }
+});
+
+// Render the menu component on the page, and pass an array with menu options
+
+React.render(
+    <MenuExample items={ ['How it Works', 'Contact', 'Blog', 'Request Access', 'Sign In'] } />,
+    document.getElementById('navigation-menu')
+);
+</script>
         <nav class="navbar navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -40,17 +96,9 @@
                     </button>
                     <a class="navbar-brand" href="#"><img src="assets/img/logo.png" width="" height=""/></a>
                 </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="#">How it Works <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Request Access</a></li>
-                        <li><a href="#"><strong>Sign In</strong></a></li>
-                    </ul>
-                </div><!--/.navbar-collapse -->
+                    <div id="navigation-menu"></div>
+                <!--/.navbar-collapse -->
             </div>
-        </nav>
         </nav>
         <div id="grad">
             <div class="container">
@@ -63,7 +111,7 @@
                     <br/>
                     <div class="row">
                         <div class="col-md-5th col-sm-6 col-xs-6">
-                            <div class="media media-icon-gn bg-clean">
+                            <div class="media media-icon-gn bg-clean mui-btn mui-btn--accent">
                                 <div class="media-left">
                                     <img class="media-object" src="assets/img/icons/industries.png" alt="...">
                                 </div>
@@ -76,7 +124,7 @@
                             </div>
                         </div>
                         <div class="col-md-5th col-sm-6 col-xs-6">
-                            <div class="media media-icon-gn bg-clean">
+                            <div class="media media-icon-gn bg-clean mui-btn mui-btn--danger">
                                 <div class="media-left">
                                     <img class="media-object" src="assets/img/icons/investor.png" alt="...">
                                 </div>
@@ -89,7 +137,7 @@
                             </div>
                         </div>
                         <div class="col-md-5th col-sm-6 col-xs-6">
-                            <div class="media media-icon-gn bg-clean">
+                            <div class="media media-icon-gn bg-clean mui-btn mui-btn--danger">
                                 <div class="media-left">
                                     <img class="media-object" src="assets/img/icons/valuation.png" alt="...">
                                 </div>
@@ -100,7 +148,7 @@
                             </div>
                         </div>
                         <div class="col-md-5th col-sm-6 col-xs-6">
-                            <div class="media media-icon-gn bg-clean">
+                            <div class="media media-icon-gn bg-clean mui-btn mui-btn--primary">
                                 <div class="media-left">
                                     <img class="media-object" src="assets/img/icons/funding.png" alt="...">
                                 </div>
@@ -111,7 +159,7 @@
                             </div>
                         </div>
                         <div class="col-md-5th col-sm-6 col-xs-12">
-                            <div class="media media-icon-gn bg-clean">
+                            <div class="media media-icon-gn bg-clean mui-btn mui-btn--primary">
                                 <div class="media-left">
                                     <img class="media-object" src="assets/img/icons/founded.png" alt="...">
                                 </div>

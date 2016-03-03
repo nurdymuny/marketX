@@ -1,0 +1,25 @@
+$base_opac: 0.3;
+$shine_opac: 1;
+$anim_length: 5s;
+$delay: 0.05;
+$letter_count: 5;
+
+#grad h3{
+    
+    opacity: $base_opac;
+    animation: letter-in-out $anim_length infinite ease-in-out;
+    
+    @for $i from 1 through $letter_count {
+      &:nth-child(#{$i}){
+        animation-delay: #{$i*$delay}s;
+      }
+    }
+  
+  }
+
+@keyframes letter-in-out {
+  0%   { opacity: $base_opac; }
+  5%   { opacity: $shine_opac; }
+  40%  { opacity: $base_opac;}
+  100% { opacity: $base_opac; }
+}

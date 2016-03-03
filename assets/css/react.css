@@ -1,0 +1,17 @@
+
+.select{
+    padding-top: 40px;
+    font-size: 12px;
+    float: right;
+    margin-right: -26%;
+    font-weight: bold;
+    color: white;
+}
+ul.nav li a {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 300;
+}
+ul.nav li a:hover {
+    opacity: 0.7;
+}
