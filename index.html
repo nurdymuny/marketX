@@ -13,12 +13,17 @@
         <link href="assets/css/react.css" rel="stylesheet">
         <link href="assets/css/style.scss">
         <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic' rel='stylesheet' type='text/css'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
         
         <script src="assets/build/script.js"></script>
         <script src="https://fb.me/react-0.13.3.js"></script>
         <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.22/require.js"></script>
         <link href="//cdn.muicss.com/mui-0.4.7/css/mui.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+        
         <script src="//cdn.muicss.com/mui-0.4.7/js/mui.min.js"></script>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,6 +35,7 @@
     
     <body>
     <script>
+    // import React from 'react';
   function activateModal() {
     // initialize modal element
     var modalEl = document.createElement('div');
@@ -172,7 +178,55 @@ React.render(
                     </div>
                     <br/>
                     <br/>
-                    <a href="#" class="btn btn-primary btn-lg">I'M INTERESTED</a> &nbsp;&nbsp;
+                    <script type="text/jsx">
+                    /*** @jsx React.DOM */
+                    var DialogContent = React.createClass({
+                    render: function(){
+                      return(
+                      <div>
+                        <form onSubmit={this.handleSubmit}>
+                          <input ref="inputText" />
+                          <input type="submit" />
+                          <button onClick = {this.props.closeDialog}>Cancel</button>
+                        </form>
+                      </div>
+                      )
+                    }
+                  });
+  
+              var DialogExample = React.createClass({
+              
+                openDialog: function(e){
+                  e.preventDefault();
+                  
+                  var dialog = $('<div style="background-color: white; border: 1px solid grey; border-radius: 15px;"><form style="margin-top:1%;"><lable style="font-weight:bold; font-size:17px; margin-left: 2%;">Let us know your email address, and we will keep you updated.</label>"<br>"Email: <input type="text" style="width:50%; height:30px; margin-top:2%;"/>').dialog({
+                    title: '',
+                    width: 800,
+                    close: function(e){
+                      React.unmountAndReleaseReactRootNode(this);
+                      $( this ).remove();
+                    }
+                  });
+                  
+                  var closeDialog = function(e){
+                    e.preventDefault();
+                    $dialog.dialog('close');
+                  }
+                    
+                  React.renderComponent(<DialogContent closeDialog={closeDialog} />, $dialog[0])
+                },
+                render: function(){
+                  return(
+                      <a href="" className="btn btn-primary btn-lg" onClick= {this.openDialog}>IM INTERESTED</a>  
+                      
+                  )
+                }
+              });
+  
+  React.render(<DialogExample />, document.getElementById('dailog'));
+  </script>
+                    <div id="dailog"></div><br>
+                     &nbsp;&nbsp;
                     <a href="#" class="btn btn-primary btn-lg">ASK A QUESTION</a>
                 </center>
             </div>
@@ -425,7 +479,6 @@ in the presentation or publication of the materials and communication herein.</s
         </div>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="assets/js/bootstrap.min.js"></script>
     </body>
